@@ -35,6 +35,9 @@
 var body = document.getElementById('body');
 /**
  * 月ごとに背景画像を設定する
+背景画像ダウンロード元
+https://www.beiz.jp/%E7%B4%A0%E6%9D%90/%E7%B4%85%E8%91%89/
+ 
  */
 function seasons(){
 	var time = new Date();
