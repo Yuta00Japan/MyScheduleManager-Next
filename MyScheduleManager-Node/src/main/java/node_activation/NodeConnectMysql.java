@@ -6,6 +6,12 @@ import java.io.InputStreamReader;
 
 import javax.servlet.ServletException;
 
+/**
+ * Node.js expressを実行させるためのクラス
+ * <br>
+ * @author yuta
+ *
+ */
 public class NodeConnectMysql extends Thread {
 
 	/**
@@ -33,6 +39,11 @@ public class NodeConnectMysql extends Thread {
 		}
 	}
 	
+	/**
+	 * エラー出力印刷
+	 * @param p エラー元
+	 * @throws IOException
+	 */
 	public static void errorMessagePrinter(Process p) throws IOException {
 		  //エラー出力
 	    BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
