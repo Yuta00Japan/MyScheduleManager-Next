@@ -29,7 +29,7 @@ public class NodeConnectMysql extends Thread {
 		        System.out.println(line);
 		    }
 		    
-		    errorMessagePrinter(p);
+		   // errorMessagePrinter(p);
 		    
 		    int exitCode = p.waitFor();
 		} catch (IOException e) {
