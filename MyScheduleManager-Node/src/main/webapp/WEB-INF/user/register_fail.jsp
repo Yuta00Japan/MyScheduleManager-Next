@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登録失敗</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/end.css">
+</head>
+<body>
+<h1>登録に失敗しました</h1>
+
+<p>${error }</p>
+
+<form action="LoginServlet" method="post">
+<p><button name="state" value="loginForm">ログイン画面へ戻る</button></p>
+</form>
+
+</body>
+</html>
