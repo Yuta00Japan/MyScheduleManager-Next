@@ -16,6 +16,7 @@
 
 <p>色判別<br>
 <span id="red">赤</span>：終了時間が過ぎた予定<br>
+<span id="yellow">黄</span>：開始２時間以内の予定<br>
 <span id="blue">青</span>：実行中の予定<br>
 <span id="green">緑</span>：開始時間も終了時間も過ぎてない予定</p>
 
