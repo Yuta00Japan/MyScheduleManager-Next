@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+body{
+	color:white;
+	background-color: lightskyblue;
+}
+
+#red{
+	background-color: red;
+}
+
+#blue{
+	background-color: #0077AA;
+}
+
+#green{
+	background-color:  rgb(128, 255, 128);
+}
+
+
+h1{
+	text-align: center;
+	margin-top:100px;
+	margin-bottom:80px;
+	font-size: 25px;
+}
+p{
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 20px;
+}
+
+#table{
+	margin:auto;
+	font-size:18px;
+	width:auto;
+}
+.contentColor{
+	background-color: rgb(128, 255, 128);
+}
+
+.detail{
+	height:200px;
+	width:500px;
+}
+
+.content{
+	text-align: center;
+}
+
+#button{
+	text-align: center;
+	margin-bottom: 50px;
+}

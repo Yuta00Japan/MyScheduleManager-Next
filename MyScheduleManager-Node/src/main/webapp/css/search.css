@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body{
+	background-color: lightskyblue;
+	color:white;
+}
+
+h1{
+	text-align: center;
+	margin-top:100px;
+	margin-bottom:80px;
+}
+
+h2{
+	text-align: center;
+}
+
+#button{
+	text-align: center;
+	margin-top:50px;
+}
