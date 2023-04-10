@@ -4,7 +4,8 @@ var trueId = 0;
 fetch('http://localhost:3000/node')
   .then(response => response.text())
   .then(data =>{
-	localStorage.setItem('ID',data);
+	trueId = data;
+	//値確認用、削除してください
 	console.log("javascript side :"+data)
   })
   .catch(error => console.error(error));
@@ -13,7 +14,6 @@ fetch('http://localhost:3000/node')
 function judgePass(){
 	//入力したID
 	var enter = document.getElementById('enterPass').value;
-	trueId = localStorage.getItem('ID');
 	
 	if(trueId == enter){
 		//書き換える内容
