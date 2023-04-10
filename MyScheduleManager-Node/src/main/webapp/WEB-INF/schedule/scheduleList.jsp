@@ -50,7 +50,7 @@
 </c:otherwise>
 </c:choose>
 <%--javascript読み込み --%>
-<script src="js/scheduleList.js"></script>s
+<script src="js/scheduleList.js"></script>
 </form>
 </body>
 </html>
