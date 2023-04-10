@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 
 import javax.servlet.ServletException;
 
+/**
+ * connect_mysql.jsのファイルをjava側から実行します。
+ * @author yuta
+ *
+ */
 public class NodeConnectMysql extends Thread {
 
 	/**
@@ -33,7 +38,11 @@ public class NodeConnectMysql extends Thread {
 		    e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * エラー文出力
+	 * @param p
+	 * @throws IOException
+	 */
 	public static void errorMessagePrinter(Process p) throws IOException {
 		  //エラー出力
 	    BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));

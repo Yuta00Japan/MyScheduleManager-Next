@@ -2,10 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.mysql.cj.conf.ConnectionUrlParser.Pair;
-
 import errConst.ErrMessage;
 import model.user.TmpUser;
 import model.user.UserLogic;
 import model.util.CreateTmpId;
-import model.util.Encrypt;
 import model.util.LoginChecker;
 import node_activation.SendSMSFromNode;
 /**
@@ -125,26 +117,7 @@ public class UserServlet extends BaseServlet {
 		//SMSスレッド開始
 		Thread sms = new SendSMSFromNode(tmp.getTel(),id);
 		sms.start();
-		/**
-		 * 暗号化後の値をブラウザにそのまま表示していると復号化されてしまうため
-		 * シャッフルする
-		 */
-		String dangerId[] = Encrypt.encrypt(""+id).split(""); 
-		
-		//値と値の要素番号を保存
-		Map<Integer, String> indexToValueMap = new HashMap<Integer, String>();
-		for (int i = 0; i < dangerId.length; i++) {
-		  indexToValueMap.put(i, dangerId[i]);
-		}
-		//値のインデックスを保存したらシャッフルする
-		Collections.shuffle(Arrays.asList(dangerId));
-		
-		//GSONでjavascriptの配列に変換
-		Gson gson = new Gson();
-		String json = gson.toJson(new Pair<String[], Map<Integer, String>>(dangerId, indexToValueMap));
-	    json = org.apache.commons.text.StringEscapeUtils.escapeHtml4(json);
-		request.setAttribute("json", json);
-		
+		session.setAttribute("TmpId", id);
 		getServletContext().getRequestDispatcher("/WEB-INF/user/register_confirm.jsp").forward(request, response);
 	}
 	

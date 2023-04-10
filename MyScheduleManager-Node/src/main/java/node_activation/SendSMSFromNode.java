@@ -5,12 +5,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
+/**
+ * SendSMS.jsファイルをjava側から実行させます
+ * @author yuta
+ *
+ */
 public class SendSMSFromNode  extends Thread{
-	
+	/**送信先電話番号*/
 	private String tel;
-	
+	/**認証ID*/
 	private int id;
 	
+	/**
+	 * 送信先、認証IDをセット
+	 * @param tel 電話番号
+	 * @param id 認証ID
+	 */
 	public SendSMSFromNode(String tel,int id) {
 		//国番号と組わせるために先頭の０を以外利用する
 		this.tel= tel.substring(1);
@@ -20,7 +30,7 @@ public class SendSMSFromNode  extends Thread{
 	public void run() {
 		
 		try {
-		    ProcessBuilder pb = new ProcessBuilder("node", "../../2023-03-java/workspace/MyScheduleManager-Node/src/main/webapp/node/sendSMS.js");
+		    ProcessBuilder pb = new ProcessBuilder("node", "../../../Users/yuta/git/MyScheduleManager-Next/MyScheduleManager-Node/src/main/webapp/node/sendSMS.js");
 		    Map<String, String> env = pb.environment();
 		    //NODE側に送る値をセット
 		    env.put("PHONE",this.tel);

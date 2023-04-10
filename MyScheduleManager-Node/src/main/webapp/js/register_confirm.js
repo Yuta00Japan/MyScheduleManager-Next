@@ -1,50 +1,19 @@
-/**
- * ユーザー登録確認画面のスクリプト
- 主にユーザー登録用IDの暗号を復号化し
- 入れた値と復号化した値が正しいかどうかを検証する
-*/
- 
-/**復号化KEY<br>"*/
-const KEY = "my-secret-key-123";
+var trueId = 0;
 
-/**
-復号化method
-@param encryptedValue 暗号化ID
- */
-function decrypt(encryptedValue) {
-   const key = CryptoJS.SHA1(KEY).toString().substring(0, 32);
-   const decryptedBytes = CryptoJS.AES.decrypt(
-    { ciphertext: CryptoJS.enc.Base64.parse(encryptedValue) },
-    CryptoJS.enc.Hex.parse(key),
-    { mode: CryptoJS.mode.ECB }
-  );
-  return decryptedBytes.toString(CryptoJS.enc.Utf8);
-} 
+//node express sideの値を取得
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://localhost:3000/phone_id');  // リクエスト先のURLを指定
+xhr.onload = () => {
+  if (xhr.status === 200) {
+    console.log("javascript side "+xhr.responseText);  // レスポンスの内容を出力
+    trueId = xhr.responseText;
+  } else {
+    console.error('Error:', xhr.statusText);
+  }
+};
+xhr.send();  // リクエストを送信
 
 
-const shuffledArray = JSON.parse(document.getElementById('shuffledId').value);
-
-/**暗号化ID(シャッフル済み) */
-const shuffledId = shuffledArray.left;
-/**シャッフル前のインデックス配列　シャッフルしたIDをもとに戻すのに使用 */
-const indexId = shuffledArray.right;
-/**シャッフル前のID配列を格納 */
-var encryptedList = [];
-//シャッフルした配列を元の順番に戻す
-for (var i = 0; i < shuffledId.length; i++) {
-  encryptedList.push(indexId[i]);
-}
-
-/**配列を文字列に変換 */
-const encryptedValue = encryptedList.join("");
-
-/**復号化済みID */
-var trueId = decrypt(encryptedValue);
-
-/**
-入力値IDと正しいIDを比較して
-正しい場合のみ登録ボタンを出現させるmethod
- */
 function judgePass(){
 	//入力したID
 	var enter = document.getElementById('enterPass').value;

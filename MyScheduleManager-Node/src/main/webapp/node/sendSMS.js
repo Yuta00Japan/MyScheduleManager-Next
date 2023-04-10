@@ -2,6 +2,9 @@
  * Java側から電話番号とIDを取得し
  * それにSMSを送信する
  */
+const LocalStorage = require('node-localstorage').LocalStorage;
+const localStorage = new LocalStorage('./scratch');
+
 console.log("activation sendSMS");
 	const { Vonage } = require('@vonage/server-sdk')
 
@@ -14,6 +17,7 @@ console.log("activation sendSMS");
 	console.log(to);
 	var id = process.env.ID;
 	console.log(id);
+	localStorage.setItem('ID',id);
 	const from = "Vonage APIs"
 	const text = `MyScheduleManager  Authentication ID =>${id}`
 

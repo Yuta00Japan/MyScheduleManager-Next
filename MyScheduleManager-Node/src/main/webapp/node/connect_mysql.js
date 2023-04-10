@@ -98,7 +98,13 @@ app.get('/setFriend',(req,res) =>{
 	});
 });
 
-
+//javascriptに電話番号とIDを返します
+app.get('/phone_id',(req,res)=>{
+	let id = localStorage.getItem('ID');
+	console.log("connect mysql"+id);
+	res.send(id);
+	
+});
 
 
 

@@ -58,7 +58,6 @@
 <button name="state" value="register">入力画面へ戻る</button>
 </p>
 
-<input type="hidden" id="shuffledId" value="<%=json%>">
 </form>
 <%--javascript読み込み --%>
 <script src="js/register_confirm.js"></script>

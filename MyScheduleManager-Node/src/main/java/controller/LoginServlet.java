@@ -62,6 +62,8 @@ public class LoginServlet extends BaseServlet {
 		//NULLか""だった場合ログイン要求とみなしログインフォームへ遷移
 		if(state == null || state.equals("")) {
 			session.invalidate();
+			Thread node = new NodeConnectMysql();
+			node.start();
 			getServletContext().getRequestDispatcher("/WEB-INF/login/LoginForm.jsp").forward(request, response);
 		}else {
 			procSessionError(request,response,session);
@@ -146,8 +148,6 @@ public class LoginServlet extends BaseServlet {
     		
     		if(user != null) {
     			session.setAttribute("user", user);
-    			Thread node = new NodeConnectMysql();
-    			node.start();
     			getServletContext().getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     		}else {
     			getServletContext().getRequestDispatcher("/WEB-INF/login/loginfail.jsp").forward(request, response);
