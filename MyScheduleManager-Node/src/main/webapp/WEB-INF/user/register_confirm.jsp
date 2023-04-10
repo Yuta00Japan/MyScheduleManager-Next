@@ -62,6 +62,5 @@
 </form>
 <%--javascript読み込み --%>
 <script src="js/register_confirm.js"></script>
-
 </body>
 </html>

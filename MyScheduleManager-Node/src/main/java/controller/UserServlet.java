@@ -23,6 +23,7 @@ import model.user.UserLogic;
 import model.util.CreateTmpId;
 import model.util.Encrypt;
 import model.util.LoginChecker;
+import node_activation.SendSMSFromNode;
 /**
  * Servlet implementation class UserServlet
  * <hr>
@@ -121,9 +122,9 @@ public class UserServlet extends BaseServlet {
 		//フォームでの入力内容を格納
 		logic.setTmpUserFromRequest(request);
 		TmpUser tmp = (TmpUser)session.getAttribute("tmpUser");
-		//メールスレッド開始
-		Thread mail = new UserLogic(tmp.getEmail(),id);
-		mail.start();
+		//SMSスレッド開始
+		Thread sms = new SendSMSFromNode(tmp.getTel(),id);
+		sms.start();
 		/**
 		 * 暗号化後の値をブラウザにそのまま表示していると復号化されてしまうため
 		 * シャッフルする

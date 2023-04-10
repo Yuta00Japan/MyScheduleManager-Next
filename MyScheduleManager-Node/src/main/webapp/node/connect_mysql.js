@@ -6,7 +6,6 @@ const session = require('express-session');
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./scratch');
 const net = require('net');
-
 const app = express();
 //8080へのアクセス許可を設定する
 app.use(function(req, res, next) {
@@ -16,6 +15,7 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
 app.use(session({
   secret: 'secret-key',
   resave: false,
@@ -74,7 +74,7 @@ isPortInUse(port)
   });
 //ここまで前処理
 
-//本処理
+//ユーザーのフレンド検索処理
 
 //userIdをjavascript側から取得しローカルストレージに格納
 app.post('/userid',(req,res) =>{
@@ -82,6 +82,7 @@ app.post('/userid',(req,res) =>{
 	localStorage.setItem('userId',data);
 	res.status(200).send("Data received successfully");
 });
+
 
 //格納したデータを取りだしたUSERLDをもとにデータベースにアクセスしデータを取りだす
 app.get('/setFriend',(req,res) =>{
@@ -96,6 +97,7 @@ app.get('/setFriend',(req,res) =>{
   		res.json(results);
 	});
 });
+
 
 
 

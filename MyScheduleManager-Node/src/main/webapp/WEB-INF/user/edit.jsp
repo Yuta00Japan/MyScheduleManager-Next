@@ -38,8 +38,8 @@
 </p>
 
 <script>
-var selectSex=document.getElementsByName('sex');
 
+var selectSex=document.getElementsByName('sex');
 var sex = document.getElementById('sex').value;
 
 window.addEventListener('load',setSex);

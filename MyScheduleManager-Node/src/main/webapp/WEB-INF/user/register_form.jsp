@@ -17,13 +17,13 @@
 <tr><td class="content">※ログインID</td><td class="content"><input type="text" name="loginId" id="loginId" maxlength=20></td></tr>
 <tr><td class="content">※ 氏名</td><td class="content"><input type="text" name="name" maxlength=30 id="name"></td></tr>
 <tr><td class="content">※ 暗証番号</td><td class="content"><input type="password" name="password" maxlength=30 id="password"></td></tr>
-<tr><td class="content">※性別</td>
+<tr><td class="content">性別</td>
 <td class="content">
 男：<input type="radio" name="sex" value="male" checked>
 女：<input type="radio" name="sex" value="female">
 </td>
 </tr>
-<tr><td class="content">電話番号</td><td class="content"><input type="tel" name="tel" maxlength=30></td></tr>
+<tr><td class="content">※電話番号</td><td class="content"><input type="tel" id="tel" name="tel" maxlength=30></td></tr>
 <tr><td class="content">※Eメール</td><td class="content"><input type="email" name="email" maxlength=100 id="email"></td></tr>
 <tr><td class="content">住所</td><td class="content"><input type="text" name="address" maxlength=100></td></tr>
 </table>
@@ -34,6 +34,7 @@
 </form>
 <script>
 
+
 //必須項目が入力されているかどうか検証
 document.getElementById('submit')
 .addEventListener('click',function(event){
@@ -42,6 +43,8 @@ document.getElementById('submit')
 		var name = document.getElementById('name');
 		var password = document.getElementById('password');
 		var email = document.getElementById('email');
+		//電話番号
+		var to = document.getElementById('tel');
 			
 		if(loginId.value == "" || loginId.value == null){
 			event.preventDefault();
@@ -64,9 +67,15 @@ document.getElementById('submit')
 			event.preventDefault();
 			alert('e-mailアドレスを入力してください');
 			return ;
-		}	
-	});
-
+		}
+		if(to.value=="" || to.value==null){
+			event.preventDefault();
+			alert('電話番号を入力してください');
+			return ;
+		}
+		
+	
+});
 
 </script>
 </body>

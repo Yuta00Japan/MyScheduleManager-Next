@@ -146,7 +146,6 @@ public class LoginServlet extends BaseServlet {
     		
     		if(user != null) {
     			session.setAttribute("user", user);
-    			//node.jsファイルを実行しサーバー3000番で起動
     			Thread node = new NodeConnectMysql();
     			node.start();
     			getServletContext().getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);

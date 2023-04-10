@@ -14,7 +14,7 @@ public class NodeConnectMysql extends Thread {
 	 */
 	public void run() {
 		try {
-		    ProcessBuilder pb = new ProcessBuilder("node", "../../2023-03-java/workspace/Test22/src/main/webapp/node/connect_mysql.js");
+		    ProcessBuilder pb = new ProcessBuilder("node", "../../2023-03-java/workspace/MyScheduleManager-Node/src/main/webapp/node/connect_mysql.js");
 		    Process p = pb.start();
 
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -26,6 +26,7 @@ public class NodeConnectMysql extends Thread {
 		    errorMessagePrinter(p);
 		    
 		    int exitCode = p.waitFor();
+		    System.out.println("node mysql :"+exitCode);
 		} catch (IOException e) {
 		    e.printStackTrace();
 		} catch (InterruptedException e) {
