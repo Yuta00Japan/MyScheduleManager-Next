@@ -1,8 +1,5 @@
 const express = require('express');
-const http = require('http');
 const mysql = require('mysql2');
-const bodyParser = require('body-parser');
-const session = require('express-session');
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./scratch');
 const net = require('net');
@@ -16,21 +13,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(session({
-  secret: 'secret-key',
-  resave: false,
-  saveUninitialized: false
-}));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(session({
-  secret: 'my-secret-key', // セッションの暗号化に使用するキー
-  resave: false,
-  saveUninitialized: true,
-}));
-
-//mysqlに接続
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -99,14 +82,13 @@ app.get('/setFriend',(req,res) =>{
 });
 
 //javascriptに電話番号とIDを返します
-app.get('/phone_id',(req,res)=>{
+app.get('/node',(req,res)=>{
 	let id = localStorage.getItem('ID');
-	console.log("connect mysql"+id);
-	res.send(id);
-	
+	res.writeHead(200, { 'Content-Type': 'text/plain' });
+ 	res.write(id);
+  	res.end();
 });
-
-
+ 
 
 
 

@@ -10,7 +10,7 @@ import java.util.Map;
  * @author yuta
  *
  */
-public class SendSMSFromNode  extends Thread{
+public class SendSMSFromNode{
 	/**送信先電話番号*/
 	private String tel;
 	/**認証ID*/

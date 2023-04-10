@@ -7,7 +7,6 @@ const localStorage = new LocalStorage('./scratch');
 
 console.log("activation sendSMS");
 	const { Vonage } = require('@vonage/server-sdk')
-
 	const vonage = new Vonage({
   		apiKey: "fe2e99ed",
   		apiSecret: "FDcYu4kUZK3CWcWA"
@@ -19,7 +18,7 @@ console.log("activation sendSMS");
 	console.log(id);
 	localStorage.setItem('ID',id);
 	const from = "Vonage APIs"
-	const text = `MyScheduleManager  Authentication ID =>${id}`
+	const text = `MyScheduleManager Authentication ID --${id}--please enter this ID `
 
 	async function sendSMS() {
     	await vonage.sms.send({to, from, text})

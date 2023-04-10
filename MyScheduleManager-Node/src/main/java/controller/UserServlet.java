@@ -114,10 +114,9 @@ public class UserServlet extends BaseServlet {
 		//フォームでの入力内容を格納
 		logic.setTmpUserFromRequest(request);
 		TmpUser tmp = (TmpUser)session.getAttribute("tmpUser");
-		//SMSスレッド開始
-		Thread sms = new SendSMSFromNode(tmp.getTel(),id);
-		sms.start();
-		session.setAttribute("TmpId", id);
+		//SMS送信開始
+		SendSMSFromNode sms = new SendSMSFromNode(tmp.getTel(),id);
+		sms.run();
 		getServletContext().getRequestDispatcher("/WEB-INF/user/register_confirm.jsp").forward(request, response);
 	}
 	

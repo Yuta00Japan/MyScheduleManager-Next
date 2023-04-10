@@ -1,22 +1,19 @@
 var trueId = 0;
 
 //node express sideの値を取得
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://localhost:3000/phone_id');  // リクエスト先のURLを指定
-xhr.onload = () => {
-  if (xhr.status === 200) {
-    console.log("javascript side "+xhr.responseText);  // レスポンスの内容を出力
-    trueId = xhr.responseText;
-  } else {
-    console.error('Error:', xhr.statusText);
-  }
-};
-xhr.send();  // リクエストを送信
+fetch('http://localhost:3000/node')
+  .then(response => response.text())
+  .then(data =>{
+	localStorage.setItem('ID',data);
+	console.log("javascript side :"+data)
+  })
+  .catch(error => console.error(error));
 
 
 function judgePass(){
 	//入力したID
 	var enter = document.getElementById('enterPass').value;
+	trueId = localStorage.getItem('ID');
 	
 	if(trueId == enter){
 		//書き換える内容

@@ -19,7 +19,7 @@ public class NodeConnectMysql extends Thread {
 	 */
 	public void run() {
 		try {
-		    ProcessBuilder pb = new ProcessBuilder("node", "../../2023-03-java/workspace/MyScheduleManager-Node/src/main/webapp/node/connect_mysql.js");
+		    ProcessBuilder pb = new ProcessBuilder("node", "../../../Users/yuta/git/MyScheduleManager-Next/MyScheduleManager-Node/src/main/webapp/node/connect_mysql.js");
 		    Process p = pb.start();
 
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
