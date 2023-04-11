@@ -1,7 +1,6 @@
 /**
  *scheudleList用javasript
  予定の時間ごとに予定の色に変化を加える 
- 過ぎた予定は赤にする
  */
  
  /**予定開始終了時間リスト */
@@ -110,12 +109,12 @@ function timeRed(now,end){
 
 /** 
  *現在時間が開始時間以上で終了時間以下だった場合は blue　済み
-  現在時間が開始時間の二時間前だった場合は yellow 未実装
+  現在時間が開始時間の二時間前だった場合は yellow　済み
 */
 function timeYellowBlue(now,start,end){
 //												２０２３年４月１２日1時１１分　ー　２０２３年４月１１日２３時１１分
 //日付をまたいだ二時間前の場合7800が二時間前となる　202304120111　ー　202304112311
-	let nowD =  Math.trunc(now / 1000000); //年月日だし小数点を切り捨てる
+	let nowD =  Math.trunc(now / 1000000); //年月日取りだし小数点を切り捨てる
 	let scheduleD= Math.trunc (start /1000000);
 	//日付が同じならば
 	if(nowD == scheduleD){
