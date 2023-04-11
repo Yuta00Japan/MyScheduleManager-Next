@@ -1,6 +1,9 @@
 /**
  * Java側から電話番号とIDを取得し
  * それにSMSを送信する
+ * 
+ * なおvonage apiはフリーversionのため電話番号を入力してもその電話番号にSMSを送ることはできません。
+ * 
  */
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./scratch');

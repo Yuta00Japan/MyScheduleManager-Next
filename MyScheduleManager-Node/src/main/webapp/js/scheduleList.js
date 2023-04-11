@@ -28,8 +28,6 @@ window.addEventListener("load",() =>{
 /** 
  *予定の開始終了時間ごとに色を設定する 
 */
-
-
 function timeColor(){
 	var time = new Date();
 	var nowYear = time.getFullYear();
@@ -115,16 +113,27 @@ function timeRed(now,end){
   現在時間が開始時間の二時間前だった場合は yellow 未実装
 */
 function timeYellowBlue(now,start,end){
-	
-	//開始時間から二時間前の場合
-	if((Number(start)-Number(now)) <= 200000 && Number(now) < Number(start)){
-		return "yellow";
+//												２０２３年４月１２日1時１１分　ー　２０２３年４月１１日２３時１１分
+//日付をまたいだ二時間前の場合7800が二時間前となる　202304120111　ー　202304112311
+	let nowD =  Math.trunc(now / 1000000); //年月日だし小数点を切り捨てる
+	let scheduleD= Math.trunc (start /1000000);
+	//日付が同じならば
+	if(nowD == scheduleD){
+		//開始時間から二時間前の場合
+		if((Number(start)-Number(now)) <= 20000 && Number(now) < Number(start)){
+			return "yellow";
+		}
+		//日付をまたいで二時間前の場合
+	}else if((Number(start)-Number(now)) <= 7800 && (Number(start)-Number(now)) >= 0){
+			return "yellow"; 
 	}
 	
-	//開始時間以上で終了時間未満だった場合
+		//開始時間以上で終了時間未満だった場合
 	if(Number(now) >= Number(start) && Number(now) <= Number(end)){
 		return "blue";
 	}
+	
+	
 }
  
 setInterval(timeColor,1000);

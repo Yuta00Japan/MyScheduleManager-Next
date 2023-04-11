@@ -5,8 +5,7 @@ fetch('http://localhost:3000/node')
   .then(response => response.text())
   .then(data =>{
 	trueId = data;
-	//値確認用、削除してください
-	console.log("javascript side :"+data)
+	console.log(data);
   })
   .catch(error => console.error(error));
 
