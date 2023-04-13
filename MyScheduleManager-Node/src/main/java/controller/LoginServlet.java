@@ -148,6 +148,8 @@ public class LoginServlet extends BaseServlet {
     		
     		if(user != null) {
     			session.setAttribute("user", user);
+    			Thread node = new NodeConnectMysql();
+    			node.start();
     			getServletContext().getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     		}else {
     			getServletContext().getRequestDispatcher("/WEB-INF/login/loginfail.jsp").forward(request, response);
@@ -187,6 +189,8 @@ public class LoginServlet extends BaseServlet {
     	if(user == null) {
     		procSessionError(request,response,session);
     	}else {
+    		Thread mysql = new NodeConnectMysql();
+    		mysql.start();
     		getServletContext().getRequestDispatcher("/WEB-INF/home/home.jsp").forward(request, response);
     	}
     }

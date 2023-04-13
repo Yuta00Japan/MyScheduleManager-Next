@@ -51,6 +51,7 @@ public class UserServlet extends BaseServlet {
 				break;
 				//登録内容確認
 			case "register_confirm":
+				//node.jsサーバータイムアウト対策　
 				procRegisterConfirm(request,response,session);
 				break;
 				//登録処理
@@ -61,7 +62,6 @@ public class UserServlet extends BaseServlet {
 			case "detail":
 				//ログインユーザー情報が保持されているかどうかを確認する
 				LoginChecker.loginCheck(session);
-				
 				procDetail(request,response);
 				break;
 				//ユーザー情報編集

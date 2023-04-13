@@ -25,7 +25,7 @@ const port= 3000;
 
 const isPortInUse = (port) => {
   return new Promise((resolve, reject) => {
-    const server = net.createServer((socket) => {})
+     const tester = net.createServer((socket) => {})
       .on('error', (err) => {
         if (err.code === 'EADDRINUSE') {
           resolve(true);
@@ -34,11 +34,12 @@ const isPortInUse = (port) => {
         }
       })
       .on('listening', () => {
-        server.close();
+        tester.close();
         resolve(false);
       })
       .listen(port);
   });
+  
 }
 
 // ポートが使用中でなければサーバーを起動
@@ -47,9 +48,14 @@ isPortInUse(port)
     if (inUse) {
       console.log(`Port ${port} is already in use.`);
     } else {
-      app.listen(port, () => {
+      const server= app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
       });
+      // 10分後にサーバーを終了する
+		const timeout = 10 * 60 * 1000;
+		setTimeout(() => {
+  		server.close();
+		}, timeout);
     }
   })
   .catch(err => {
@@ -81,7 +87,7 @@ app.get('/setFriend',(req,res) =>{
 	});
 });
 
-//javascriptに電話番号とIDを返します
+//javascriptにIDを返します
 app.get('/node',(req,res)=>{
 	let id = localStorage.getItem('ID');
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
