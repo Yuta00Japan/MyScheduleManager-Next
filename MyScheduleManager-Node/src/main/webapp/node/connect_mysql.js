@@ -51,11 +51,9 @@ isPortInUse(port)
       const server= app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
       });
-      // 10分後にサーバーを終了する
-		const timeout = 10 * 60 * 1000;
-		setTimeout(() => {
-  		server.close();
-		}, timeout);
+      
+      //タイムアウトしないように設定
+      server.setTimeout(0);
     }
   })
   .catch(err => {
@@ -69,7 +67,6 @@ isPortInUse(port)
 app.post('/userid',(req,res) =>{
 	let data = req.body.userId;
 	localStorage.setItem('userId',data);
-	res.status(200).send("Data received successfully");
 });
 
 

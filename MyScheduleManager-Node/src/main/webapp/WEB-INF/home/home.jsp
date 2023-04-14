@@ -26,7 +26,16 @@
 //USERLDを取得しNODE expressのローカルストレージに格納
 const userId = document.getElementById('user').value;
 
-fetch('http://localhost:3000/userid', {
+const controller = new AbortController();
+const signal = controller.signal;
+
+// タイムアウトを設定
+const timeoutId = setTimeout(() => {
+  console.log("Request timed out");
+  controller.abort(); // リクエストを中止する
+}, 60000); // 60秒
+
+fetch('http://localhost:3000/userid',${signal}, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({userId:userId})
@@ -37,7 +46,11 @@ fetch('http://localhost:3000/userid', {
 })
 .catch((error) => {
   console.error('Error:', error);
+})
+.finally(() => {
+	  clearTimeout(timeoutId); // タイムアウトをクリアする
 });
+
 </script>
 </body>
 </html>

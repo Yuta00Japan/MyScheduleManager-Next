@@ -52,8 +52,17 @@ typeを指定する必要がある。
 
 </form>
 <script>
+const controller = new AbortController();
+const signal = controller.signal;
+
+// タイムアウトを設定
+const timeoutId = setTimeout(() => {
+  console.log("Request timed out");
+  controller.abort(); // リクエストを中止する
+}, 60000); // 60秒
+
 //USERのフレンド情報をselectにセットする
-fetch('http://localhost:3000/setFriend')
+fetch('http://localhost:3000/setFriend',{signal})
 .then(response => response.json())
 .then(data => {
   console.log("fetch "+data); // レスポンスデータを処理する
@@ -65,8 +74,10 @@ fetch('http://localhost:3000/setFriend')
 })
 .catch(error => {
   console.error(error); // エラーを処理する
+})
+.finally(() => {
+	  clearTimeout(timeoutId); // タイムアウトをクリアする
 });
-
 
 document.getElementById('add').addEventListener('click',friendAdd);
 document.getElementById('finish').addEventListener('click',finish);
