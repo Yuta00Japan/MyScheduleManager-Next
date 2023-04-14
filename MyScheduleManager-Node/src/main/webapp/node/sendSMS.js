@@ -11,8 +11,8 @@ const localStorage = new LocalStorage('./scratch');
 console.log("activation sendSMS");
 	const { Vonage } = require('@vonage/server-sdk')
 	const vonage = new Vonage({
-  		apiKey: "fe2e99ed",
-  		apiSecret: "FDcYu4kUZK3CWcWA"
+  		apiKey: "??????",
+  		apiSecret: "??????????"
 	})
 	
 	var to = "81"+process.env.PHONE;
