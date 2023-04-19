@@ -3,7 +3,10 @@ const mysql = require('mysql2');
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./scratch');
 const net = require('net');
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser.json());
 //8080へのアクセス許可を設定する
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -66,6 +69,7 @@ isPortInUse(port)
 //userIdをjavascript側から取得しローカルストレージに格納
 app.post('/userid',(req,res) =>{
 	let data = req.body.userId;
+	console.log(data);
 	localStorage.setItem('userId',data);
 });
 

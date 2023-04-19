@@ -36,7 +36,7 @@ typeを指定する必要がある。
  --%>
 
 <h3>現在のフレンド追加数:<span id="count">0</span><br>
-フレンドコード：<select id="code"></select><button type="button" id="add">フレンドコード追加</button>
+フレンド名：<select id="code"></select><button type="button" id="add">フレンドコード追加</button>
 
 時間帯：<input type="datetime-local" name="startTime" value="${schedule.startTime }" required>～
 <input type="datetime-local" name="endTime" value="${schedule.endTime }" required></h3>

@@ -24,8 +24,9 @@
 </form>
 <script>
 //USERLDを取得しNODE expressのローカルストレージに格納
-const userId = document.getElementById('user').value;
+var userId = document.getElementById('user').value;
 
+//console.log(userId);
 const controller = new AbortController();
 const signal = controller.signal;
 
@@ -35,9 +36,10 @@ const timeoutId = setTimeout(() => {
   controller.abort(); // リクエストを中止する
 }, 60000); // 60秒
 
-fetch('http://localhost:3000/userid',${signal}, {
+fetch('http://localhost:3000/userid',{
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
+  signal:signal,
   body: JSON.stringify({userId:userId})
 })
 .then(response => response.json())
