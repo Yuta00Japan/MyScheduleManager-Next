@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>従業員検索</title>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
+</head>
+<body>
+
+<form method="post">
+		
+		
+		<h1><button  formaction="/security/menu" class="button">戻る</button></h1>
+		
+		
+	<div id="form">
+		<span class="form">名前検索 <input type="text" name="name"  id="textBox"></span>
+		<span class="form">所属 
+			<select id="branch" name="branch">
+				<option value=""></option>
+			</select>
+		</span>
+		<span class="form">部署
+			<select id="department" name="department">
+				<option value=""></option>
+			</select>
+		</span>
+		
+		<span class="form">削除者<input type="radio" name="enable" value="true"></span>
+		<span class="form"><button class="button" formaction="/emp/search">検索</button></span>
+	</div>
+	
+	<h2>(名前、仮名の部分一致)</h2>
+	
+	<div id="result">
+		<table id="table">
+			<tr>
+				
+				<th class="start"></th>
+				<th class="head">No</th>
+				<th class="head">従業員名</th>
+				<th class="head">所属</th>
+				<th class="head">部署</th>
+				<th class="head">上司</th>
+			</tr>
+			<!--検索結果なし -->
+			<th:if test="${empList.list.size() <=0}">
+				
+			</th:if>
+			
+			<!--検索結果あり -->
+			<th:if test="${empList.list.size() > 0}">
+				
+				<tr th:each="employee : ${empList.list}" class="result">	
+						<td class="content">
+						<!--システム管理者のみ実行可能 -->
+							<th:if test="${authority == '1' }">
+						<!--従業員検索の場合 -->
+								<button name="state" value="detail,${employee.empId }" formaction="EmployeeController">選択</button>
+			
+						<!--上司検索の場合 -->
+							</th:if>
+						</td>
+						
+						<td class="content" th:text="${employee.empNo}"/>
+						
+						<td class="content" th:text="${employee.fullName }"/>
+						
+						<td class="content branchId" th:text="${employee.branchId}" />
+						
+						<td class="content departmentId" th:text="${employee.departmentId}"/>
+						
+						<td class="content bossId" th:text="${employee.bossId}"/>
+										
+				</th:each>
+				
+			</th:if>
+		</table>
+	</div>
+
+</form>
+<script>
+/**
+ * 検索結果の表示に色を設定する
+ */
+window.addEventListener('load',()=>{
+
+	var result = document.querySelectorAll('.result');
+	
+	for(let i = 0; i < result.length; i++){
+		//偶数の場合
+		if((i+1)%2==0){
+			result[i].style.backgroundColor='#FF8C00';
+		}else{
+			result[i].style.backgroundColor='#FFA07A';
+		}
+	}
+	
+	setBranch();
+});
+
+
+/**
+ * 支社ID、部署ID、上司IDなどの情報から名称取りだしセットする
+ */
+
+function setBranch(){
+	//支社IDを表示するselectタグ要素
+	var branchSelect = document.getElementsById('branch');
+	//従業員の支社IDを複数含む
+	var branchId = document.querySelectorAll('.branchId');
+	
+	fetch('http://localhost:3000/setBranch')
+	.then(response => response.json())
+	.then(data =>{
+		let option ='';
+		
+		for(let i = 0; i < data.length; i++){
+			option +='<option value='+data[i].branchId+'>'+data[i].branchName+'</option>';
+		}
+		
+		branchSelect.innerHTML = option;
+	})
+	
+	//検索結果で表示される支社IDをもとに検索し支社名をIDの代わりにセットする
+	fetch('http://localhost:3000/setbranchName',{
+		method:'POST',
+		headers: { 'Content-Type': 'application/json' },
+		signal:signal,
+		body: JSON.stringify({branchId:branchId})
+	})
+	.then(response => response.json())
+	.then(data =>{
+		
+		for(let i = 0; i < branchId.length; i++){
+			branchId[i].textContent = data[i].branchName;
+		}
+	})
+	
+}
+
+
+</script>
+
+
+</body>
+</html>

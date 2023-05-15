@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログインフォーム</title>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+
+<h1><label id="header" for="txtID">ログイン</label></h1>
+
+<form action="/security/login" method="post">
+
+<div id="container">
+
+	<div id="label">
+		<h2><label class="ID" for="txtID">LoginID</label></h2>
+
+		<h3><label class="PASS" for="txtPASS">パスワード</label></h3>
+	</div>
+
+	<div id="form">
+		<h2><input type="text" name="txtID" id="txtID"></h2>
+
+		<h3><input type="text" name="txtPASS" id="txtPASS"><button class="button" name="state" value="try_Login">LogIn</button></h3>
+
+	</div>
+
+</div>
+
+</form>
+
+	<h4><label></label></h4>
+
+</body>
+</html>
